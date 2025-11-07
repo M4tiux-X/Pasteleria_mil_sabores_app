@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF"
+    tools:context=".TortaEditActivity"
+    android:id="@+id/main"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:text="Editar Torta"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- Imagen actual de la torta -->
+        <ImageView
+            android:id="@+id/imgTortaEditar"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="Imagen de la torta"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background" />
+
+        <!-- Campo: Nombre -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
+            android:text="Nombre"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etNombreTorta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ej: Torta de Chocolate"
+            android:inputType="textPersonName"
+            android:padding="10dp" />
+
+        <!-- Campo: Descripción -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp"
+            android:text="Descripción"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etDescripcionTorta"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:hint="Describe la torta..."
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:padding="10dp" />
+
+        <!-- Campo: Precio -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp"
+            android:text="Precio"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etPrecioTorta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ej: 12990"
+            android:inputType="numberDecimal"
+            android:padding="10dp" />
+
+        <!-- Campo: Stock -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp"
+            android:text="Stock"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etStockTorta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cantidad disponible"
+            android:inputType="number"
+            android:padding="10dp" />
+
+        <!-- Campo: Personalizable -->
+        <CheckBox
+            android:id="@+id/chkPersonalizable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:text="¿Es personalizable?" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#D8E2A261"
+        android:text="Volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="114dp"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:backgroundTint="#D8E2A261"
+        android:text="Guardar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.784"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.957" />
+
+    <Button
+        android:id="@+id/btnCancelar"
+        android:layout_width="118dp"
+        android:layout_height="46dp"
+        android:layout_weight="1"
+        android:backgroundTint="#D8E2A261"
+        android:text="Cancelar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.957" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
