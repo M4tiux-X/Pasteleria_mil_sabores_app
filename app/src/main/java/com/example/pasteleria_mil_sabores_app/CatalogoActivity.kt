@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pasteleria_mil_sabores_app.API.ProductoAdapter
 import com.example.pasteleria_mil_sabores_app.API.RetrofitClient
 import com.example.pasteleria_mil_sabores_app.model.Producto
+import com.example.pasteleria_mil_sabores_app.TortaEditActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,7 +47,18 @@ class CatalogoActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Producto>>,response: Response<List<Producto>>){
                 if (response.isSuccessful){
                     val lista=response.body() ?: emptyList()
-                    recyclerTortas.adapter= ProductoAdapter(lista)
+                    recyclerTortas.adapter = ProductoAdapter(lista) { productoSeleccionado ->
+                        val intent = Intent(this@CatalogoActivity, TortaEditActivity::class.java)
+                        intent.putExtra("id", productoSeleccionado.id_producto)
+                        intent.putExtra("nombre", productoSeleccionado.nombre_produ)
+                        intent.putExtra("descripcion", productoSeleccionado.descripcion)
+                        intent.putExtra("precio", productoSeleccionado.precio)
+                        intent.putExtra("stock", productoSeleccionado.stock)
+                        intent.putExtra("categoria", productoSeleccionado.id_categoria)
+                        intent.putExtra("imagen", productoSeleccionado.imagen)
+                        intent.putExtra("personalizable", productoSeleccionado.personalizable)
+                        startActivity(intent)
+                    }
                 }else{
                     Log.e("API","Error al obtener productos: ${response.code()}")
                 }

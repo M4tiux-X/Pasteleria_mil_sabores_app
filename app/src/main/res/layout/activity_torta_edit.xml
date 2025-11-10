@@ -31,7 +31,7 @@
 
         <!-- Imagen actual de la torta -->
         <ImageView
-            android:id="@+id/imgTortaEditar"
+            android:id="@+id/imgTortaEditar1"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginBottom="16dp"
@@ -48,7 +48,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/etNombreTorta"
+            android:id="@+id/etNombreTorta1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ej: Torta de Chocolate"
@@ -65,7 +65,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/etDescripcionTorta"
+            android:id="@+id/etDescripcionTorta1"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:hint="Describe la torta..."
@@ -83,7 +83,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/etPrecioTorta"
+            android:id="@+id/etPrecioTorta1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ej: 12990"
@@ -100,7 +100,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/etStockTorta"
+            android:id="@+id/etStockTorta1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Cantidad disponible"
@@ -109,7 +109,7 @@
 
         <!-- Campo: Personalizable -->
         <CheckBox
-            android:id="@+id/chkPersonalizable"
+            android:id="@+id/chkPersonalizable1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="12dp"

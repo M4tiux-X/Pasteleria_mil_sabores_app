@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.pasteleria_mil_sabores_app.model.Producto
 
-class ProductoAdapter(private val listaProductos: List<Producto>):
+class ProductoAdapter(private val listaProductos: List<Producto>,private val onItemClick: (Producto) -> Unit):
     RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
 
     inner class ProductoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -37,6 +37,9 @@ class ProductoAdapter(private val listaProductos: List<Producto>):
             .placeholder(R.drawable.ic_launcher_background)
             .into(holder.imgProducto)
 
+        holder.itemView.setOnClickListener {
+            onItemClick(producto)
+        }
 
     }
 
