@@ -46,8 +46,7 @@ class CatalogoActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Producto>>,response: Response<List<Producto>>){
                 if (response.isSuccessful){
                     val lista=response.body() ?: emptyList()
-                    adapter= ProductoAdapter(lista)
-                    recyclerTortas.adapter=adapter
+                    recyclerTortas.adapter= ProductoAdapter(lista)
                 }else{
                     Log.e("API","Error al obtener productos: ${response.code()}")
                 }
