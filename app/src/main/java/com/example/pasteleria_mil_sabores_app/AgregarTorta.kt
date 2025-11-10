@@ -167,12 +167,30 @@ class AgregarTorta : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                val json = JSONObject(response.body?.string() ?: "")
-                imageUrl = json.getJSONObject("data").getString("link")
+                val responseBody = response.body?.string()
                 runOnUiThread {
-                    Toast.makeText(this@AgregarTorta, "Imagen subida correctamente", Toast.LENGTH_SHORT).show()
+                    if (response.isSuccessful && responseBody != null) {
+                        try {
+                            val json = JSONObject(responseBody)
+                            if (json.has("data")) {
+                                val data = json.getJSONObject("data")
+                                imageUrl = data.getString("link")
+                                Toast.makeText(this@AgregarTorta, "Imagen subida correctamente", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(this@AgregarTorta, "Error: respuesta sin 'data'", Toast.LENGTH_SHORT).show()
+                                android.util.Log.e("IMGUR_ERROR", "Respuesta: $responseBody")
+                            }
+                        } catch (e: Exception) {
+                            Toast.makeText(this@AgregarTorta, "Error al procesar respuesta", Toast.LENGTH_SHORT).show()
+                            e.printStackTrace()
+                        }
+                    } else {
+                        Toast.makeText(this@AgregarTorta, "Error del servidor: ${response.code}", Toast.LENGTH_SHORT).show()
+                        android.util.Log.e("IMGUR_ERROR", "Código ${response.code} -> $responseBody")
+                    }
                 }
             }
+
         })
     }
 

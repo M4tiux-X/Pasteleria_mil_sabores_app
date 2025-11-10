@@ -47,7 +47,7 @@ class TortaEditActivity : AppCompatActivity() {
 
         // Recibir datos del intent
         idProducto = intent.getLongExtra("id", 0)
-        etNombreTorta.setText(intent.getStringExtra("nombre"))
+        etNombreTorta.setText(intent.getStringExtra("nombre_produ"))
         etDescripcionTorta.setText(intent.getStringExtra("descripcion"))
         etPrecioTorta.setText(intent.getDoubleExtra("precio", 0.0).toString())
         etStockTorta.setText(intent.getIntExtra("stock", 0).toString())

@@ -15,9 +15,11 @@ class ProductoAdapter(private val listaProductos: List<Producto>,private val onI
 
     inner class ProductoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val imgProducto: ImageView= itemView.findViewById(R.id.imgProducto)
-        val tvNombreProducto: TextView = itemView.findViewById(R.id.tvNombreProducto)
+        val tvNombreProducto: TextView = itemView.findViewById(R.id.tvNombreProducto
+        )
         val tvDescripcionProducto: TextView = itemView.findViewById(R.id.tvDescripcionProducto)
         val tvPrecioProducto: TextView = itemView.findViewById(R.id.tvPrecioProducto)
+        val btnEditarProducto: View = itemView.findViewById(R.id.btnEditarProducto)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
@@ -37,7 +39,7 @@ class ProductoAdapter(private val listaProductos: List<Producto>,private val onI
             .placeholder(R.drawable.ic_launcher_background)
             .into(holder.imgProducto)
 
-        holder.itemView.setOnClickListener {
+        holder.btnEditarProducto.setOnClickListener {
             onItemClick(producto)
         }
 

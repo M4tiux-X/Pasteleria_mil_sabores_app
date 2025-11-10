@@ -50,7 +50,7 @@ class CatalogoActivity : AppCompatActivity() {
                     recyclerTortas.adapter = ProductoAdapter(lista) { productoSeleccionado ->
                         val intent = Intent(this@CatalogoActivity, TortaEditActivity::class.java)
                         intent.putExtra("id", productoSeleccionado.id_producto)
-                        intent.putExtra("nombre", productoSeleccionado.nombre_produ)
+                        intent.putExtra("nombre_produ", productoSeleccionado.nombre_produ)
                         intent.putExtra("descripcion", productoSeleccionado.descripcion)
                         intent.putExtra("precio", productoSeleccionado.precio)
                         intent.putExtra("stock", productoSeleccionado.stock)
