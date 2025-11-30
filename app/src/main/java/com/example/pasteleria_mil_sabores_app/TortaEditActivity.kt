@@ -9,74 +9,62 @@ import androidx.core.view.WindowInsetsCompat
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.example.pasteleria_mil_sabores_app.API.RetrofitClient
+import com.example.pasteleria_mil_sabores_app.dao.ProductoDAO
 import com.example.pasteleria_mil_sabores_app.model.Producto
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class TortaEditActivity : AppCompatActivity() {
-    private lateinit var imgTortaEditar: ImageView
-    private lateinit var etNombreTorta: EditText
-    private lateinit var etDescripcionTorta: EditText
-    private lateinit var etPrecioTorta: EditText
-    private lateinit var etStockTorta: EditText
+
+    private lateinit var dao: ProductoDAO
+
+    private lateinit var imgTorta: ImageView
+    private lateinit var etNombre: EditText
+    private lateinit var etDescripcion: EditText
+    private lateinit var etPrecio: EditText
+    private lateinit var etStock: EditText
     private lateinit var chkPersonalizable: CheckBox
     private lateinit var btnGuardar: Button
     private lateinit var btnCancelar: Button
     private lateinit var btnVolver: Button
 
-    private var idProducto: Long = 0
-    private var imagenUrl: String? = null
-    private var idCategoria: Int = 1 // Valor por defecto, puedes ajustarlo según tu API
-
+    private var idProducto: Long = -1L
+    private var imagenGuardada: String? = null   // base64 o ruta
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_torta_edit)
 
-        // Vincular vistas
-        imgTortaEditar = findViewById(R.id.imgTortaEditar1)
-        etNombreTorta = findViewById(R.id.etNombreTorta1)
-        etDescripcionTorta = findViewById(R.id.etDescripcionTorta1)
-        etPrecioTorta = findViewById(R.id.etPrecioTorta1)
-        etStockTorta = findViewById(R.id.etStockTorta1)
+        dao = ProductoDAO(this)
+
+        imgTorta = findViewById(R.id.imgTortaEditar1)
+        etNombre = findViewById(R.id.etNombreTorta1)
+        etDescripcion = findViewById(R.id.etDescripcionTorta1)
+        etPrecio = findViewById(R.id.etPrecioTorta1)
+        etStock = findViewById(R.id.etStockTorta1)
         chkPersonalizable = findViewById(R.id.chkPersonalizable1)
         btnGuardar = findViewById(R.id.btnGuardar)
         btnCancelar = findViewById(R.id.btnCancelar)
         btnVolver = findViewById(R.id.btnVolver)
 
-        // Recibir datos del intent
-        idProducto = intent.getLongExtra("id", 0)
-        etNombreTorta.setText(intent.getStringExtra("nombre_produ"))
-        etDescripcionTorta.setText(intent.getStringExtra("descripcion"))
-        etPrecioTorta.setText(intent.getDoubleExtra("precio", 0.0).toString())
-        etStockTorta.setText(intent.getIntExtra("stock", 0).toString())
-        imagenUrl = intent.getStringExtra("imagen")
-        idCategoria = intent.getIntExtra("categoria", 1)
-        chkPersonalizable.isChecked = intent.getBooleanExtra("personalizable", false)
+        idProducto = intent.getLongExtra("id_producto", -1L)
 
-        // Mostrar imagen con Glide
-        imagenUrl.let {
-            Glide.with(this)
-                .load(it)
-                .placeholder(R.drawable.ic_launcher_background)
-                .into(imgTortaEditar)
+        if (idProducto == -1L) {
+            Toast.makeText(this, "Error: no se recibió el ID del producto", Toast.LENGTH_SHORT).show()
+            finish()
+            return
         }
 
-        // Botón: Guardar cambios
+        cargarDatos(idProducto)
+
         btnGuardar.setOnClickListener {
             actualizarProducto()
         }
 
-        // Botón: Cancelar → limpia los campos
-        btnCancelar.setOnClickListener {
-            limpiarCampos()
-        }
-
-        // Botón: Volver → cierra la activity
-        btnVolver.setOnClickListener {
-            finish()
-        }
+        btnCancelar.setOnClickListener { finish() }
+        btnVolver.setOnClickListener { finish() }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -84,53 +72,67 @@ class TortaEditActivity : AppCompatActivity() {
             insets
         }
     }
+    private fun cargarDatos(id: Long) {
+        // Como no tenemos un método obtenerProductoPorId(), lo buscamos desde listar()
+        val producto = dao.listar().find { it.id_producto == id }
 
+        if (producto != null) {
+            etNombre.setText(producto.nombre_produ)
+            etDescripcion.setText(producto.descripcion)
+            etPrecio.setText(producto.precio.toString())
+            etStock.setText(producto.stock.toString())
+            chkPersonalizable.isChecked = producto.personalizable
+            imagenGuardada = producto.imagen
+
+            if (!imagenGuardada.isNullOrEmpty()) {
+                try {
+                    val file = File(imagenGuardada!!)
+                    if (file.exists()) {
+                        Glide.with(this)
+                            .load(file)
+                            .into(imgTorta)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        } else {
+            Toast.makeText(this, "Producto no encontrado en SQLite", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+    }
     private fun actualizarProducto() {
-        val nombre = etNombreTorta.text.toString().trim()
-        val descripcion = etDescripcionTorta.text.toString().trim()
-        val precio = etPrecioTorta.text.toString().toInt()
-        val stock = etStockTorta.text.toString().toIntOrNull() ?: 0
+
+        val nombre = etNombre.text.toString()
+        val descripcion = etDescripcion.text.toString()
+        val precio = etPrecio.text.toString().toIntOrNull() ?: 0
+        val stock = etStock.text.toString().toIntOrNull() ?: 0
         val personalizable = chkPersonalizable.isChecked
 
-        if (nombre.isEmpty() || descripcion.isEmpty() || precio <= 0) {
-            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+        if (nombre.isEmpty()) {
+            Toast.makeText(this, "El nombre no puede estar vacío", Toast.LENGTH_SHORT).show()
             return
         }
 
         val productoActualizado = Producto(
             id_producto = idProducto,
+            id_categoria = 1,  // aquí puedes cambiar la categoría si usas spinner luego
             nombre_produ = nombre,
             descripcion = descripcion,
             precio = precio,
             stock = stock,
-            id_categoria = idCategoria,
-            imagen = imagenUrl,
-            personalizable = personalizable
+            personalizable = personalizable,
+            imagen = imagenGuardada
         )
 
-        val api = RetrofitClient.instance
-        api.actualizarProducto(idProducto, productoActualizado)
-            .enqueue(object : Callback<Producto> {
-                override fun onResponse(call: Call<Producto>, response: Response<Producto>) {
-                    if (response.isSuccessful) {
-                        Toast.makeText(this@TortaEditActivity, "Torta actualizada correctamente", Toast.LENGTH_SHORT).show()
-                        finish() // vuelve al catálogo
-                    } else {
-                        Toast.makeText(this@TortaEditActivity, "Error al actualizar (${response.code()})", Toast.LENGTH_SHORT).show()
-                    }
-                }
+        val result = dao.actualizar(productoActualizado)
 
-                override fun onFailure(call: Call<Producto>, t: Throwable) {
-                    Toast.makeText(this@TortaEditActivity, "Fallo de conexión: ${t.message}", Toast.LENGTH_LONG).show()
-                }
-            })
+        if (result > 0) {
+            Toast.makeText(this, "Producto actualizado correctamente", Toast.LENGTH_SHORT).show()
+            finish()
+        } else {
+            Toast.makeText(this, "Error al actualizar", Toast.LENGTH_SHORT).show()
+        }
     }
 
-    private fun limpiarCampos() {
-        etNombreTorta.text.clear()
-        etDescripcionTorta.text.clear()
-        etPrecioTorta.text.clear()
-        etStockTorta.text.clear()
-        chkPersonalizable.isChecked = false
-    }
 }

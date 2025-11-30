@@ -19,6 +19,6 @@ interface ProductoApi {
     @PUT("productos/{id}")
     fun actualizarProducto(
         @Path("id") id: Long,
-        @Body producto:     Producto
+        @Body producto:Producto
     ): Call<Producto>
 }

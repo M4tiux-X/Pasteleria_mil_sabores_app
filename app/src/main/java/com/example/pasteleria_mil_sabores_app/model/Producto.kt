@@ -11,7 +11,5 @@ data class Producto (
     val precio: Int,
     val stock: Int,
     val personalizable: Boolean,
-    val imagen: String?
+    val imagen: String?,
 )
-
-

@@ -54,48 +54,19 @@
         app:layout_constraintVertical_bias="0.052" />
 
     //FORMULARIO
-    <EditText
-        android:id="@+id/ed_codigo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Ingrese el Codigo"
-        android:inputType="text"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="513dp"
-        tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/ed_telefono"
+        android:id="@+id/ed_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Ingrese su Telefono"
-        android:inputType="text"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="379dp"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/ed_direccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Ingrese su Direccion"
-        android:inputType="text"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="326dp"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/ed_fecnac"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Ingrese su Fecha de Nacimiento"
-        android:inputType="date"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="281dp"
+        android:hint="Ingrese su Nombre"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -105,18 +76,27 @@
         android:ems="10"
         android:hint="Ingrese su Correo"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="191dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.381"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/ed_nombre"
+        android:id="@+id/ed_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Ingrese su Nombre"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="101dp"
+        android:hint="Ingrese una Contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.447"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -126,29 +106,12 @@
         android:ems="10"
         android:hint="Ingrese su Apellido"
         android:inputType="text"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="146dp"
-        tools:ignore="MissingConstraints" />
-
-    <EditText
-        android:id="@+id/ed_contraseña"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Ingrese una Contraseña"
-        android:inputType="text"
-        tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="236dp"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/btnVolver5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#D8E2A261"
-        android:text="Volver"
-        tools:layout_editor_absoluteX="22dp"
-        tools:layout_editor_absoluteY="29dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.316"
         tools:ignore="MissingConstraints" />
 
 
@@ -158,10 +121,13 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#D8E2A261"
         android:text="Crear Cuenta"
-        tools:layout_editor_absoluteX="147dp"
-        tools:layout_editor_absoluteY="570dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.831"
         tools:ignore="MissingConstraints" />
-
 
     <Button
         android:id="@+id/btn_ingresar"
@@ -169,49 +135,12 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#D8E2A261"
         android:text="Ingresar Cuenta"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="629dp"
-        tools:ignore="MissingConstraints" />
-
-    <RadioGroup
-        android:id="@+id/rg_Opciones"
-        android:layout_width="252dp"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.962"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintVertical_bias="0.668">
-
-        <RadioButton
-            android:id="@+id/rb_codigoSi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="si"
-            tools:layout_editor_absoluteX="239dp"
-            tools:layout_editor_absoluteY="465dp" />
-
-        <RadioButton
-            android:id="@+id/rb_codigoNo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="no"
-            tools:layout_editor_absoluteX="112dp"
-            tools:layout_editor_absoluteY="454dp" />
-
-
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Posees codigo de descuento?"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="435dp"
+        app:layout_constraintVertical_bias="0.934"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

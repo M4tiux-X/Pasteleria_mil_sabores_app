@@ -1,5 +1,6 @@
 package com.example.pasteleria_mil_sabores_app.API
 
+import android.se.omapi.Session
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -7,21 +8,25 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
 
-    private const val BASE_URL="http://192.168.98.45:8080/api/"
-
+    /*CAMBIO DE IP
+    * en la CMD escribir: ipconfig, copiar y pegar la direcion del IPv4
+    *  y correr la api ocupando el siguiente comando:
+    * mvn spring-boot:run -Dspring-boot.run.arguments="--server.address=0.0.0.0"*/
+    private const val URL_USUARIO="http://192.168.0.19:8090/api/"
     private val logging= HttpLoggingInterceptor().apply {
         level= HttpLoggingInterceptor.Level.BODY
     }
 
-    private val client = OkHttpClient.Builder().addInterceptor(logging).build()
+    private val clientUsu = OkHttpClient.Builder().addInterceptor(logging).build()
 
-    val instance: ProductoApi by lazy {
-        val  retrofit= Retrofit.Builder()
-            .baseUrl(BASE_URL)
+
+    val usuarioApi: UsuarioApi by lazy {
+        Retrofit.Builder()
+            .baseUrl(URL_USUARIO)
+            .client(clientUsu)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
             .build()
-
-        retrofit.create(ProductoApi::class.java)
+            .create(UsuarioApi::class.java)
     }
+
 }

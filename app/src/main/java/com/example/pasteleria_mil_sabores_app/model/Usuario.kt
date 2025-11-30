@@ -1,13 +1,13 @@
 package com.example.pasteleria_mil_sabores_app.model
 
-data class Usuario (
-    val id: Int,
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Usuario(
+    val id_usuario: Long?=null,
+    val id_tipo_usu: Int=2,//usuario normal predeterminado
     val nombre: String,
     val apellido: String,
-    val email: String,
-    val contraseña: String,
-    val fec_nac: String,
-    val direccion: String,
-    val telefono: String,
-    val cod_registro: String
+    val correo: String,
+    val pass: String
 )
